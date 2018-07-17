@@ -275,3 +275,83 @@ var json = {name:'hello'};
 var str = JSON.stringify(json);
 
 ```
+
+## data 自定义数据
+
+- dataset
+  - data-name: dataset.name
+  - data-name-first: dataset.nameFirst
+- data 数据在 jquery mobile 中有着重要作用
+
+··· js
+
+<div id="part" data-wovert="zan" data-first-name="cg">contnet</div>
+
+var oDiv = document.getElementById('part');
+console.log(oDiv.dataset.wovert); // zan
+console.log(oDiv.dataset.firstName); // cg
+···
+
+## 延迟加载 JS
+
+- JS 的加载会影响后面的内容加载
+  - 很多 Browser 采用了并行加载 JS, 但还是会影响其他内容
+- HTML 5 的 defer 和 async
+  - defer: 延迟加载，会按顺序执行，在 onload 执行前被处罚
+  - async: 异步加载，加载完就触发，有顺序问题
+
+- [Labjs 库](https://github.com/getify/LABjs)
+
+``` html
+<script src="a.js"></script>
+<script src="b.js"></script>
+<script src="c.js"></script>
+
+<img src="photo.jpg">
+```
+
+所有的 js 代码加载完成之后才能显示内容图片
+
+### 解决方案 1
+
+``` html
+<img src="photo.jpg">
+<script src="a.js"></script>
+<script src="b.js"></script>
+<script src="c.js"></script>
+</body>
+```
+
+### 解决方案 2
+
+``` html
+<script src="a.js" defer="defer"></script>
+<script src="b.js"  defer="defer"></script>
+<script src="c.js"  defer="defer"></script>
+<img src="photo.jpg">
+
+```
+
+#### defer
+
+> 延迟脚本的执行
+
+- 定义和用法
+  - defer 属性规定是否对脚本执行进行延迟，直到页面加载为止。
+  - 有的 javascript 脚本 document.write 方法来创建当前的文档内容，其他脚本就不一定是了。
+  - 如果您的脚本不会改变文档的内容，可将 defer 属性加入到 `<script>` 标签中，以便加快处理文档的速度。因为浏览器知道它将能够安全地读取文档的剩余部分而不用执行脚本，它将推迟对脚本的解释，直到文档已经显示给用户为止。
+
+浏览器支持: 只有 `Internet Explorer` 支持 defer 属性
+
+语法: `<script defer="value">`
+
+### 解决方案 3
+
+``` html
+<script src="a.js" async="async" defer="defer"></script>
+<script src="b.js"  async="async" defer="defer"></script>
+<script src="c.js" async="async" defer="defer"></script>
+<img src="photo.jpg">
+```
+
+async 会与 img 并排加载文件
