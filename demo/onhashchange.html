@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+
+
+
+    window.onload = function() {
+      var oInput = document.getElementById('input1');
+      var json = {};      var oDiv = document.getElementById('div1');
+      var json = {};
+
+      oInput.onclick = function(){
+        var num = Math.random();
+        var arr = randomNum(35, 7);
+        json[num] = arr;
+        oDiv.innerHTML = arr;
+        window.location.hash = num;
+      }
+   
+
+      // hash 改变时触发
+      window.onhashchange = function() {
+        oDiv.innerHTML = json[window.location.hash.substring(1)];
+      }
+    }
+    function randomNum(all, current) {
+      var arr = [];
+      var cnt = all;
+      var newArr = [];
+
+      for(var i=1; i<=all; i++) {
+        arr.push(i);
+      }
+
+      //console.log(arr);
+
+      var count = arr.length;
+      var v;
+      var index;
+      var random;
+      var i=0;
+      while(newArr.length < current) {
+        random = Math.random()*count;
+        index = Math.floor(random);
+        v = arr.splice(index, 1);
+
+        if(v ==0 || v == '') continue;
+
+        newArr.push(v);
+
+        console.log('第' + (i + 1) + '次，随机:' + index + ',获取' + v + ':', arr, newArr);
+        
+        i++;
+      }
+      return newArr;
+    }
+
+  </script>
+</head>
+<body>
+  <form>
+    <input type="button" value="随机选择" id="input1">
+    <div id="div1"></div>
+  </form>
+</body>
+</html>

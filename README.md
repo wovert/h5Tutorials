@@ -355,3 +355,20 @@ console.log(oDiv.dataset.firstName); // cg
 ```
 
 async 会与 img 并排加载文件
+
+## 历史管理
+
+- 触发历史管理
+  - 通过跳转页面
+  - hash
+  - pushStates
+
+- onhashchange: 改变 hash 值来管理
+- history
+  - 服务器下运行
+  - pushState: 三个参数；数据标题（都没实现）地址（可选）
+  - popstate 事件：读取数据 event.state
+  - 注意：网址是虚假的，虚在服务器指定对应页面，不然刷新找不到页面
+
+
+  
