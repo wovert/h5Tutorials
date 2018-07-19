@@ -370,5 +370,28 @@ async 会与 img 并排加载文件
   - popstate 事件：读取数据 event.state
   - 注意：网址是虚假的，虚在服务器指定对应页面，不然刷新找不到页面
 
+## 拖放
 
-  
+> draggable: 设置为ture, 元素就可以拖拽了(在 Chrome/Opera 可以拖拽)
+
+### 拖放事件
+
+- 拖拽元素事件：
+  - 拖拽元素事件：事件对象为被拖拽元素
+    - dragstart: 拖拽钱触发
+    - drag 拖拽前、拖拽结束之间，连续触发
+    - dragend: 拖拽结束触发
+
+- 目标元素事件：事件对象为目标元素
+  - dragenter: 进入目标元素触发，相当于 mouseover
+  - dragover: 进入目标、离开目标之间，连续触发
+  - dragleave: 离开目标元素触发，相当于 mouseout
+  - drop: 在目标元素上释放鼠标触发
+
+- 事件的执行顺序：drop 不触发的时候
+  - dragstart -> drag > dragenter > dragover > dragleave > dragend
+
+- 事件的执行顺序：drop 触发的时候(dragover 的时候阻止默认事件)
+  - dragstart > drag > dragenter > dragover > drop > dragend
+
+- 不能释放的光标和能释放的光标不一样
