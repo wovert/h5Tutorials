@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    li {
+      list-style: none;
+      width: 100px;
+      height: 30px;
+      background: yellow;
+      margin: 10px;
+    }
+    #div1 {
+      width: 100px;
+      height: 100px;
+      background: red;
+      margin: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="div1">将文件拖拽到此区域</div>
+  <ul id="list">
+
+  </ul>
+  <script>
+    window.onload = function(){
+      
+      var target = document.getElementById('div1');
+
+     
+      // onmouseover
+      target.ondragenter = function() {
+        this.innerHTML = '可以释放了';
+
+      }
+
+      // onmouseout
+      target.ondragleave = function() {
+        this.innerHTML = '将文件拖拽到此区域'; 
+      }
+
+      // enter和leave之间连续触发
+      target.ondragover = function(e) {
+        // 触发 drop 事件，必须在 dragover 阻止默认事件
+        e.preventDefault();
+
+
+      }
+
+      
+      target.ondrop = function(e) {
+        // 拖拽文件不会打开
+        e.preventDefault();
+
+        var fs = e.dataTransfer.files;
+        console.log(fs);
+
+        for(var i=0; i<fs.length; i++) {
+          if(fs[i].type.indexOf('image') != -1) {
+            var fd = new FileReader();
+            fd.readAsDataURL(fs[i]);
+            fd.onload = function(){
+              // ajax 2 可以上传字节流（文件、图片、压缩包）
+              console.log(this.result);
+              var liObj = document.createElement('li');
+              var imgObj = document.createElement('img');
+              imgObj.src = this.result;
+              var listObj = document.getElementById('list');
+              listObj.appendChild(liObj.appendChild(imgObj));
+            }
+          } else {
+            alert('请上传图片类型');
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>

@@ -395,3 +395,30 @@ async 会与 img 并排加载文件
   - dragstart > drag > dragenter > dragover > drop > dragend
 
 - 不能释放的光标和能释放的光标不一样
+
+- [解决firefox 不能拖放问题](./demo/dragdrop-firefox.html)
+  - 必须设置 dataTrasfer对象的 setData 方法才可以拖拽除图片外的其他标签
+
+- dataTrasfer 对象
+  - setData() 设置数据 key 和 value（必须是字符串）
+  - getData() 获取数据，根据key 值，获取对应的 value
+
+  - effectAllowed
+    - effectAllowed: 设置光标样式(none,copy,copyLink, copyMove, link, linkMove, move, all 和 uninitialized)
+  - setDragImage(对象，坐标，坐标) 拖拽图标
+    - 三个参数：指定的元素，坐标X，坐标Y
+  - files
+    - 获取外部拖拽的文件，返回一个 filesList 列表
+    - fileList 下有个 type 属性，返回文件的类型
+
+  - FileREader(读取文件信息)
+    - readAsDataURL: 参数为要读取的文件对象，将文件读取为 DataUrl
+  
+    - onload
+      - 当读取文件成功完成的时候触发此事件
+      - this.result, 来获取读取的文件数据，如果是图片，将返回 base64 格式的图片数据
+    - 实例
+      - 拖拽删除列表
+      - 拖拽购物车
+      - 上传图片预览功能
+  

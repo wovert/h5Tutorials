@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    li {
+      list-style: none;
+      width: 100px;
+      height: 30px;
+      background: yellow;
+      margin: 10px;
+    }
+    #div1 {
+      width: 100px;
+      height: 100px;
+      background: red;
+      margin: 200px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li draggable="true">a</li>
+    <li draggable="true">b</li>
+    <li draggable="true">c</li>
+  </ul>
+  <div id="div1"></div>
+  <img src="./img/smp.jpg" id="smp" />
+  <script>
+    window.onload = function(){
+      var ul = document.getElementsByTagName('ul')[0];
+      var lis = document.getElementsByTagName('li');
+      var img = document.getElementsByTagName('img')[0];
+      var target = document.getElementById('div1');
+
+      var cnt = lis.length;
+
+      for(var i=0; i<cnt; i++) {
+        lis[i].index = i;
+        lis[i].ondragstart = function(e, i){
+
+          var e = e || window.event;
+          e.dataTransfer.setData('name', this.index);
+
+          e.dataTransfer.effectAllowed = 'move';
+
+          e.dataTransfer.setDragImage(img, 0, 0);
+
+          this.style.background = 'green'; 
+          console.log('source' + i +':dragstart');
+        }
+
+        lis[i].ondragend = function(i){
+         this.style.background = 'yellow'; 
+         console.log('source' + i +':dragend');
+        }
+
+        // 开始和结束连续触发
+        lis[i].ondrag = function(i){
+         this.style.background = 'blue'; 
+         console.log('source' + i +':drag');
+        }
+
+        lis[i].onmousemove = function(i){
+         this.style.background = 'gray'; 
+         console.log('source' + i +':mousemove');
+        }
+      }
+
+      // onmouseover
+      target.ondragenter = function() {
+        this.style.background = 'blue'; 
+        console.log('target:dragenter');
+      }
+
+      // onmouseout
+      target.ondragleave = function() {
+        this.style.background = 'gray'; 
+        console.log('target:dragleave');
+      }
+
+      // enter和leave之间连续触发
+      target.ondragover = function(e) {
+        // 触发 drop 事件，必须在 dragover 阻止默认事件
+        e.preventDefault();
+
+        this.style.background = 'purple'; 
+        console.log('target:dragover');
+
+      }
+
+      
+      target.ondrop = function(e) {
+        this.style.background = 'black'; 
+        ul.removeChild(lis[e.dataTransfer.getData('name')]);
+        
+        console.log('target:drag');
+        console.log(e.dataTransfer.getData('name'));
+        
+        for(var i=0; i<lis.length; i++) {
+          lis[i].index = i;
+        }
+
+      }
+    }
+  </script>
+</body>
+</html>
