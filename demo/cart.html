@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  *{margin:0;padding:0}
+  li{list-style:none;}
+  li{float:left;width:200px;border:1px solid #000;margin:10px;}
+  li img{width:200px;}
+  p{border-bottom:1px dashed #333;height:20px;line-height:20px;}
+  #cart{width:600px;border:1px solid #000;height:300px;clear:both}
+  .box span{float:left;width:200px;}
+  #allMoney{float:right}
+  </style>
+</head>
+<body>
+  <ul>
+    <li draggable="true">
+      <img src="./img/img1.jpg" />
+      <p>JavaScript语言精粹</p>
+      <p>40￥</p>
+    </li>
+    <li draggable="true">
+      <img src="./img/img2.jpg" />
+      <p>JavaScript权威指南</p>
+      <p>120￥</p>
+    </li>
+    <li draggable="true">
+      <img src="./img/img3.jpg" />
+      <p>精通JavaScript</p>
+      <p>35￥</p>
+    </li>
+    <li draggable="true">
+      <img src="./img/img4.jpg" />
+      <p>JavaScript DOM 编程艺术</p>
+      <p>45￥</p>
+    </li>    
+  </ul>
+  <div id="cart">
+<!--     
+    <div id="allMoney">￥90</div> -->
+  </div>
+  <script>
+    window.onload = function(){
+      var lis = document.getElementsByTagName('li');
+      var target = document.getElementById('cart');
+      var cnt = lis.length;
+
+      var obj = {};
+      var iNum = 0;
+      var allMoney = null;
+
+      for(var i=0; i<cnt; i++) {
+        lis[i].ondragstart = function(e){
+          var e = e || window.event;
+          var ps = this.getElementsByTagName('p');
+          e.dataTransfer.setData('title', ps[0].innerHTML);
+          e.dataTransfer.setData('money', ps[1].innerHTML);
+          e.dataTransfer.setDragImage(this, 0, 0);
+        }
+
+        lis[i].ondragend = function(i){
+        }
+
+        // 开始和结束连续触发
+        lis[i].ondrag = function(i){
+        }
+
+        lis[i].onmousemove = function(i){
+
+        }
+      }
+
+      // onmouseover
+      target.ondragenter = function() {
+
+      }
+
+      // onmouseout
+      target.ondragleave = function() {
+
+      }
+
+      // enter和leave之间连续触发
+      target.ondragover = function(e) {
+        // 触发 drop 事件，必须在 dragover 阻止默认事件
+        e.preventDefault();
+
+
+      }
+
+      
+      target.ondrop = function(e) {
+        e.preventDefault();
+        var title = e.dataTransfer.getData('title');
+        var money = e.dataTransfer.getData('money');
+
+        if(!obj[title]) {
+          var pObj = document.createElement('p');
+          var spanNumberObj = document.createElement('span');
+          var spanTitleObj = document.createElement('span');
+          var spanMoneyObj = document.createElement('span');
+          
+          pObj.className = 'box';
+          spanNumberObj.innerHTML = 1;
+          spanTitleObj.innerHTML = title;
+          spanMoneyObj.innerHTML = money;
+          pObj.appendChild(spanNumberObj);
+          pObj.appendChild(spanTitleObj);
+          pObj.appendChild(spanMoneyObj);
+
+          target.appendChild(pObj);
+
+          obj[title] = 1;
+        } else {
+          var pObj = document.getElementsByClassName('box');
+          var  cnt = pObj.length;
+          console.log(cnt);
+          for(var i=0; i<cnt; i++) {
+            if (title == pObj[i].getElementsByTagName('span')[1].innerHTML) {
+              pObj[i].getElementsByTagName('span')[0].innerHTML = parseInt(pObj[i].getElementsByTagName('span')[0].innerHTML) + 1;
+            }
+          }
+        }
+        
+        if(!allMoney) {
+          allMoney = document.createElement('div');
+          allMoney.id ='allMoney';
+        }
+        iNum += parseInt(money);
+        allMoney.innerHTML = '￥' + iNum;
+        target.appendChild(allMoney);
+      }
+    }
+  </script>
+</body>
+</html>

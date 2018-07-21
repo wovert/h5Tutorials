@@ -18,13 +18,11 @@ asice 相关引用、侧边栏
 
 hgroup 标题组
 
-
 ### 语义化标签
 
 figure 媒体元素组合
 
 time 时间  <time datetime="2008-02-14">发布</time>
-
 
 ### 功能标签
 
@@ -422,3 +420,4 @@ async 会与 img 并排加载文件
       - 拖拽购物车
       - 上传图片预览功能
   
+(拖拽购物车)[./demo/cart.html]
