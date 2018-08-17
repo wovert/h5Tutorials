@@ -28,7 +28,7 @@ time 时间  <time datetime="2008-02-14">发布</time>
 
 datalist 列表
 
-```
+``` html
 <input type="text" list="vaList">
 <datalist id="vaList">
   <option value="javascript">Javascript</option>
@@ -39,7 +39,7 @@ datalist 列表
 
 detail 详情信息
 
-```
+``` html
 <details>
   <summary>信息</summary>
   <p>详细信息</p>
@@ -48,7 +48,7 @@ detail 详情信息
 
 定义一段对方
 
-```
+``` html
 <dialog>
   <dt>老师</dt>
   <dd>2+2等于?</dd>
@@ -65,7 +65,7 @@ mark 标记的词或句子
 
 keygen 给表单添加一个公钥
 
-```
+``` html
 <form action="" method="">
 username:<input type="text" name="username" />
 公钥：<keygen name="security" />
@@ -75,7 +75,7 @@ username:<input type="text" name="username" />
 
 progress
 
-```
+``` html
 max最大值，value当前值,span为了向下兼容
 <progress max="100" value="76">
   <span>76</span>%
@@ -124,7 +124,7 @@ cg {
   - min、max、step(步数)
   - 用 JS 来显示当前数值
 
-```
+``` html
 <input type="range" step="1" min="0" max="10" value="2" />
 ```
 
@@ -149,7 +149,7 @@ cg {
 - pattern: 正则验证 pattern="\d{1,5}"
 - formaction 在 submit 里定义提交地址
 
-```
+``` html
 <form action="http://fqdn.org">
   <input type="submit" value="submit">
   <input type="submit" vlaue="temp" formaction="http://fqdn.com">
@@ -171,7 +171,7 @@ cg {
   - customError 不符合自定义验证
     - setCustomValidity(); 自定义验证
 
-```
+``` html
 <form action="http://fqdn.org">
   <input type="text" required id="text" />
   <input type="submit" />
@@ -215,7 +215,7 @@ oText.addEventListener('invalid', function(){
 - querySelectorAll
 - getElementsByClassName
 
-```
+``` html
 <div id="div1" class="box" title="hello"></div>
 <div id="div2" class="box" title="world"></div>
 <div id="part" class="box1 box2 box3" title="world"></div>
@@ -253,7 +253,6 @@ oDiv.style.background = 'red';
 - 新方法的应用；深度克隆新对象
 - 如何其他浏览器做到兼容 [json2.js](http://www.json.org)
 
-
 ``` js
 var str = 'function show(){console.log(123);}';
 eval(str);
@@ -282,7 +281,6 @@ var str = JSON.stringify(json);
 - data 数据在 jquery mobile 中有着重要作用
 
 ··· js
-
 <div id="part" data-wovert="zan" data-first-name="cg">contnet</div>
 
 var oDiv = document.getElementById('part');
@@ -420,4 +418,6 @@ async 会与 img 并排加载文件
       - 拖拽购物车
       - 上传图片预览功能
   
-(拖拽购物车)[./demo/cart.html]
+[拖拽购物车](./demo/cart.html)
+
+`//`表示**同协议**，一般现在用在https跨域名地址情况下。比如第三方统计代码的引入，用//就不用很麻烦地区分https还是http，也不用担心https下降到http出问题
