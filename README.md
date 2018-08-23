@@ -420,4 +420,19 @@ async 会与 img 并排加载文件
   
 [拖拽购物车](./demo/cart.html)
 
-`//`表示**同协议**，一般现在用在https跨域名地址情况下。比如第三方统计代码的引入，用//就不用很麻烦地区分https还是http，也不用担心https下降到http出问题
+`//`表示**同协议**，一般现在用在https跨域名地址情况下。比如第三方统计代码的引入，用//就不用很麻烦地区分https还是http，也不用担心https下降到http出问题`
+
+## optgroup 标签
+
+``` HTML
+<select name="from" id="s2">
+<optgroup label="北京">
+  <option value="">朝阳</option>
+  ....
+</optgroup>
+<optgroup label="上海">
+  <option value="">浦东</option>
+  ....
+</optgroup>
+</select>
+```
