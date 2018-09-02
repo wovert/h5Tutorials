@@ -436,3 +436,100 @@ async 会与 img 并排加载文件
 </optgroup>
 </select>
 ```
+
+## canvas
+
+> 绘制图像：canvas元素没有绘图能力，所有绘制工作必须在 JavaScript 内部完成
+
+绘制图片
+
+``` JavaScript
+var img = new Image();
+img.onload = function(){
+  context.drawImage(img, 0, 0);
+}
+```
+
+## H5移动开发中的准则
+
+- 尽量使用单页面开发（SPA）
+- 慎重选择前段UI框架
+- 动画、特效使用准则（60fps）
+- 长度单位使用 rem
+
+### 浏览器消耗最小的CSS属性
+
+- 位置：transform: translate(x,x,y)
+- 大小：transform: scale(n)
+- 旋转：transform: ratate(ndeg)
+- 透明度：opacity: 0~1
+
+- [CSS消耗性能表](http://csstriggers.com/)
+
+## 页面基本布局构成
+
+- 流式布局-适合内容型应用
+- 绝对定位布局-适合交互类应用
+- flexbox布局-适合局部使用（Android4.1+ iOS 7+）
+- CSS Grid layout(2015-3 WD chrome)
+
+## 收集点击事件
+
+- 屏幕按下：touchsart
+- 触碰离开：touchend
+- 触碰移动：touchmove
+
+- 一次完整的点击：touchstart+touchend
+
+## 构建详细的内容列表
+
+使用[iscrolljs滚动条插件](http://iscrolljs.com)构建平滑列表
+
+注意：iscrolljs 内部不能含有 box-shadow,opacity, text-shadow, alpha
+
+## 应用缓存
+
+- 离线浏览：用户可在应用离线时使用缓存
+- 速度：已缓存资源加载得更快
+- 减少服务器负载：浏览器将只从服务器下载更新过或更改的过的资源
+
+- 实现缓存：
+  - 需要应用程序缓存，在文档的<html>标签中包含 manifest 属性。manifest文件的建议的文件扩展名是：'.appcache'
+
+### Manifest 文件
+
+1. CACHE MANIFEST: 在此标题下列出的文件将在首次下载后进行缓存
+2. NETWORK : 在此标题下的文件需要与服务器的连接，且不会被缓存
+3. FALLBACK : 在此标题下列出的文件规定当页面无法访问时的回退页面（比如404页面）
+
+注意：文件资源必须Web服务器上
+
+## Web Workers
+
+> 运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能
+
+### 方法
+
+- postMessage() 用于向 HTML 页面传回一段消息
+- terminate() 终止 web worker,并释放浏览器/计算机资源
+
+### 事件
+
+- onmessage
+
+## 服务器推送事件
+
+- HTML5 规范中的一个组成部分，可以用来从服务端实时推送数据到浏览器端
+- 传统的服务器端推送数据技术
+  - WebSocket: WebSocket 规范是H5中的一个重要组成部分，已经被很多主流浏览器所支持，也有不少基于 WebSocket开发的应用。正如名称所表示的一样，WebSocket 使用的是套接字连接，基于 TCP 协议。使用 WebSocket 之后，实际上在服务器端和浏览器端之间建立一个套接字连接，可以进行双向的数据传输。WebSocket 的功能是很强大的，使用起来也灵活，可以适用于不同的场景。不过 WebSocket 技术也比较复杂，包括服务器和浏览器的实现都不同于一般的 Web 应用
+  - http 协议：简易轮询，即浏览器定时向服务器端发出请求，来查询是否有数据更新。轮询间隔间隔过长，会导致用户不能及时接收到更新的数据；轮询的间隔过短，会导致查询请求过多，增加服务器端负担。
+
+### 实现
+
+- 服务器代码头；`header('Content-Type: text/event-stream');`
+
+- EventSource 事件
+- onopen 服务器的连接被打开
+- onmessage 接受消息
+- onerror 错误发生
+
