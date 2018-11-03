@@ -1,52 +1,68 @@
 # HTML5
 
+## 移动互联网
+
+- 跨平台
+  - PC/Mac/iPhone/Android等主流平台的跨平台语言
+
+- 快速迭代
+- 降低成本:H5开发比原生APP开发成本降低一倍
+- 导流入口多: H5应用导流非常容易
+- 分发效率高：
+
+## Web 改变趋势
+
+- Native APP(开发成本高) -> WebAPP(性能问题) -> Hybrid APP
+- PC -> 移动 -> 智慧互联
+- AR / VR / 智能硬件
+
 ## HTML5 语义化标签
 
 ### 结构化标签
 
-header 页头、元数据
+- `article` 结构完整且独立的内容部分容器
+- `header` 页头、元数据容器
+- `nav`  导航链接容器
+- `section` 页面板块，定义区域容器
+- `asice` 定义页面内容的侧边栏或相关引用容器
+- `hgroup` 定义一个区块的相关信息，多个标题容器
+- `figure` 定义一组媒体内容以及它们的标题
+  - `figcaption` 定义 figure 元素的标题
+- `footer` 定义页面附加信息或页脚容器
+- `dialog` 定义一个对话框（会话框）类似微信
 
-footer 页脚
+### 优先级别
 
-nav  导航
+1. header/section/aside/article/footer
+2. header/section/footer > aside/article/figure/hgroup/nav > div/figcaption
 
-section 页面板块
+### 多媒体标签
 
-article 结构完整且独立的内容部分
-
-asice 相关引用、侧边栏
-
-hgroup 标题组
-
-### 语义化标签
-
-figure 媒体元素组合
-
-time 时间  <time datetime="2008-02-14">发布</time>
-
-### 功能标签
-
-datalist 列表
-
-``` html
-<input type="text" list="vaList">
-<datalist id="vaList">
-  <option value="javascript">Javascript</option>
-  <option value="html">html</option>
-  <option value="css">css</option>
-</datalist>
-```
-
-detail 详情信息
+- `video` 定义一个视频
+  - `src`
+  - `autoplay="autoplay"`
+  - `loop="-1"`
+  - `controls="controls"`
+- `audio` 定义音频内容
+- `source` 定义媒体资源
+- `canvas` 定义图片
+- `embed` 定义外部的可交互的内部或插件，比如 flash
 
 ``` html
-<details>
-  <summary>信息</summary>
-  <p>详细信息</p>
-</details>
+<audio src="x.mp3" autoplay="autoplay" loop="-1" controls="controls">您的浏览器不支持此标签</audio>
+
+<audio autoplay="autoplay" loop="-1" controls="controls">
+  <source src="x.mp3" type="audio/mpeg" />
+</audio>
+
+<video  controls="controls" width="1024" height="768">
+  <source src="x.mp4" type="video/mp4" />
+</video>
+
+<embed src="x.swf" width="1024" height="768">
 ```
 
-定义一段对方
+- 定义一段对方
 
 ``` html
 <dialog>
@@ -59,33 +75,126 @@ detail 详情信息
 </dialog>
 ```
 
-address 定义文章或页面作者的详细联系信息
+### Web 应用标签
 
-mark 标记的词或句子
-
-keygen 给表单添加一个公钥
+- `meter` 状态标签(实时状态显示：气压、气温)
+  - 兼容性：Chrome, Opera
+- `progres` 状态标签(任务过程：安装、加载)
+  - 兼容性：Chrome, Firefox, Opera
+- `datalist` input标记定义一个下拉列表，配合 Option
+  - 兼容性: Firefox, Opera
+- `details` 定义一个元素详细内容，配置 summary
+  - 兼容性：Chrome
+- `menu` 命令列表（目前所有主流浏览器都不支持）
+  - `menuitem` menu命令列表标签(Firefox8.0+支持)
+  - `command` 定义一个命令按钮（IE9支持）
 
 ``` html
-<form action="" method="">
-username:<input type="text" name="username" />
+<!-- low 和 high 是安全范围 -->
+<meter value="220" min="20" max="380" low="200" high="240" optimum="220"></meter>
+
+<meter value="0.75">75%</meter>
+
+<!-- max最大值，value当前值,span为了向下兼容 -->
+<progress max="100" value="76">
+  <span>76</span>%
+</progress>
+
+<input type="text" list="vaList">
+<datalist id="vaList">
+  <option value="javascript">Javascript</option>
+  <option value="html">html</option>
+  <option value="css">css</option>
+</datalist>
+
+<details>
+  <summary>信息</summary>
+  <p>详细信息</p>
+</details>
+
+
+<menu type="toolbar">
+  <li>
+    <menu lable="File">
+      <button type="button">New ...</button>
+      <button type="button">Open ...</button>
+      <button type="button">Save ...</button>
+    </menu>
+  </li>
+  <li>
+    <menu lable="Edit">
+      <button type="button">Cut ...</button>
+      <button type="button">Copy ...</button>
+      <button type="button">Paste ...</button>
+    </menu>
+  </li>  
+</menu>
+```
+
+### 其他标签
+
+- `ruby` 定义注释或音标
+- `rt` 定义对 ruby 的注释内容文本
+- `rp` 告诉那些不支持 ruby 元素的浏览器如何去显示
+
+``` html
+<p>我们来
+<ruby>夼
+  <rt>
+    <rp>(</rp>
+    Kuang
+    <rp>)<rp>
+  </rt>
+</ruby>
+一个话题
+</p>
+```
+
+- `address` 定义文章或页面作者的详细联系信息
+- `mark` 标记的词或句子
+- `output` 输出内容
+- `keygen` 给表单添加一个公钥
+- `time` 定义一个日期/时间，目前所有主流浏览器都不支持
+  - `<time datetime="2008-02-14">发布</time>`
+
+``` html
+
+<p>我要吃<mark>牛奶</mark></p>
+
+<!-- oninput事件实时监听文本框的输入变化 -->
+<form action="" method=" oninput="totalPrice.value=parseInt(price.value)*parseInt(number.value)">
+
+<input type="range" name="price" id="price" value="" value="5000" />
+
+*<input type="number" id="number" value="1">
+
+=<output name="totalPrice" for="price number"></output>
+
 公钥：<keygen name="security" />
 <input type="submit" />
 </form>
 ```
 
-progress
+### 删除的标签
 
-``` html
-max最大值，value当前值,span为了向下兼容
-<progress max="100" value="76">
-  <span>76</span>%
-</progress>
-```
+- 纯表现的元素：`basefont, big, center, font, s, strike, tt,u`
+- 对可用性产生负面影响的元素：`frame, frameset, noframes`
+- 产生混淆的元素：`acronym, appplet, isindex, dir`
+
+### 重定义标签
+
+- b : 通常是粗体，没有传递表示重要的意思
+- i : 通常是斜体，没有传递表示重要的意思
+- dd(标题) : 可以同 detail 与 figure 一同使用，定义包含文本，dialog 也可用
+- dd(描述): 可以同 details 与 figure 一同使用，汇总细节，dialog 也可用
+- hr : 表示主题结束，而不是水平线，虽然显示相同
+- menu : 重新定义用户界面的菜单，配合 command 或者 menuitem 使用
+- small : 表示小字体，例如打印注释或者法律条款
+- strong : 表示**重要性**而不是强调符号
 
 ## 低版本兼容
 
-``` HTML
-
+``` js
 <script>
   var cgTag = document.createElement('cg');
   var header = document.createElement('header');
@@ -116,12 +225,12 @@ cg {
 
 ### 新的输入型空间
 
-- email: 当输入不是邮箱格式的时候，验证不通过；移动端的键盘会有变化
-- tel: 电话号码
-- url: 网页的URL
-- search: 搜索引擎；chrome 下输入文字后，会多出一个关闭的 X
-- range: 特定范围内的数值选择器
-  - min、max、step(步数)
+- `email`: 当输入不是邮箱格式的时候，验证不通过；移动端的键盘会有变化
+- `tel`: 电话号码
+- `url`: 网页的URL
+- `search`: 搜索引擎；chrome 下输入文字后，会多出一个关闭的 X
+- `range`: 特定范围内的数值选择器
+  - `min、max、step`(步数)
   - 用 JS 来显示当前数值
 
 ``` html
@@ -443,7 +552,7 @@ async 会与 img 并排加载文件
 
 绘制图片
 
-``` JavaScript
+``` js
 var img = new Image();
 img.onload = function(){
   context.drawImage(img, 0, 0);
@@ -459,10 +568,10 @@ img.onload = function(){
 
 ### 浏览器消耗最小的CSS属性
 
-- 位置：transform: translate(x,x,y)
-- 大小：transform: scale(n)
-- 旋转：transform: ratate(ndeg)
-- 透明度：opacity: 0~1
+- 位置：`transform: translate(x,x,y)`
+- 大小：`transform: scale(n)`
+- 旋转：`transform: ratate(ndeg)`
+- 透明度：`opacity: 0~1`
 
 - [CSS消耗性能表](http://csstriggers.com/)
 
@@ -475,17 +584,16 @@ img.onload = function(){
 
 ## 收集点击事件
 
-- 屏幕按下：touchsart
-- 触碰离开：touchend
-- 触碰移动：touchmove
+- 屏幕按下：`touchsart`
+- 触碰离开：`touchend`
+- 触碰移动：`touchmove`
 
-- 一次完整的点击：touchstart+touchend
+- 一次完整的点击：`touchstart+touchend`
 
 ## 构建详细的内容列表
 
-使用[iscrolljs滚动条插件](http://iscrolljs.com)构建平滑列表
-
-注意：iscrolljs 内部不能含有 box-shadow,opacity, text-shadow, alpha
+- 使用[iscrolljs滚动条插件](http://iscrolljs.com)构建平滑列表
+- 注意：iscrolljs 内部不能含有 box-shadow,opacity, text-shadow, alpha
 
 ## 应用缓存
 
